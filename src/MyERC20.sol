@@ -31,7 +31,7 @@ contract MyERC20 {
         decimals = _decimals;
         symbol = _symbol;
 
-        _mint(msg.sender , _initialSupply);
+        _mint(msg.sender, _initialSupply);
     }
 
     function transfer(address to, uint256 amount) public returns (bool) {
@@ -89,48 +89,49 @@ contract MyERC20 {
         address spender,
         uint256 subValue
     ) public returns (bool) {
-        if(spender == address(0)) revert WrongAddress();
+        if (spender == address(0)) revert WrongAddress();
 
         uint256 currentAllowance = allowance[msg.sender][spender];
-        if(currentAllowance < subValue) revert InsufficientAllowance();
+        if (currentAllowance < subValue) revert InsufficientAllowance();
 
         allowance[msg.sender][spender] = currentAllowance - subValue;
 
-        emit Approval(msg.sender , spender , allowance[msg.sender][spender]);
+        emit Approval(msg.sender, spender, allowance[msg.sender][spender]);
         return true;
     }
 
-    function _mint(address account , uint256 amount) internal {
+    function _mint(address account, uint256 amount) internal {
         if (account == address(0)) revert WrongAddress();
 
         totalSupply += amount;
         balanceOf[account] += amount;
 
-        emit Transfer(address(0) , account , amount);
+        emit Transfer(address(0), account, amount);
     }
 
-    function _burn(address account , uint256 amount) internal {
+    function _burn(address account, uint256 amount) internal {
         if (account == address(0)) revert WrongAddress();
         if (balanceOf[account] < amount) revert InsufficientBalance();
 
         balanceOf[account] -= amount;
         totalSupply -= amount;
 
-        emit Transfer(account , address(0) , amount);
+        emit Transfer(account, address(0), amount);
     }
 
-    function mint(address to , uint256 amount) public {
-        _mint(to , amount);
+    function mint(address to, uint256 amount) public {
+        _mint(to, amount);
     }
 
     function burn(uint256 amount) public {
-        _burn(msg.sender , amount);
+        _burn(msg.sender, amount);
     }
 
-    function burnFrom(address account , uint256 amount) public {
-        if (allowance[account][msg.sender] < amount) revert InsufficientAllowance();
+    function burnFrom(address account, uint256 amount) public {
+        if (allowance[account][msg.sender] < amount)
+            revert InsufficientAllowance();
 
         allowance[account][msg.sender] -= amount;
-        _burn(account , amount);
+        _burn(account, amount);
     }
 }
