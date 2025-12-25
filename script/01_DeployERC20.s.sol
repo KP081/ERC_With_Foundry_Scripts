@@ -12,8 +12,6 @@ contract DeployERC20 is Script {
 
     error InsufficientBalance();
     error InvalidPrivateKey();
-    error WrongAddress();
-    error InsufficientAllowance();
 
     function run() external returns (MyERC20) {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
