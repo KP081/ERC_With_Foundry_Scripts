@@ -14,7 +14,7 @@ contract DeployERC20 is Script {
     error InvalidPrivateKey();
 
     function run() external returns (MyERC20) {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        uint256 deployerPrivateKey = vm.envUint("ANVIL_PRIVATE_KEY");
         address deployer = vm.addr(deployerPrivateKey);
 
         console.log("Deployer Address:", deployer);
