@@ -134,7 +134,7 @@ contract MyERC721 {
         _safeMint(to, tokenId);
     }
 
-    function burn(uint256 tokenId) public {
+    function burn(uint256 tokenId) public virtual {
         if (!_isApprovedOrOwner(msg.sender, tokenId))
             revert NotOwnerOrApproved();
 
@@ -266,7 +266,7 @@ contract MyERC721 {
         _setBaseURI(baseURI);
     }
 
-    function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public pure virtual returns (bool) {
         return
             interfaceId == 0x80ac58cd || // ERC721
             interfaceId == 0x5b5e139f || // ERC721Metadata
