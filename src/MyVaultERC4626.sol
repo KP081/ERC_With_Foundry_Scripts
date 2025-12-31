@@ -51,7 +51,7 @@ contract MyVaultERC4626 {
     function deposit(
         uint256 assets,
         address receiver
-    ) public returns (uint256 shares) {
+    ) public virtual returns (uint256 shares) {
         if (assets == 0) revert ZeroAssets();
 
         // Calculate shares to mint
@@ -90,7 +90,7 @@ contract MyVaultERC4626 {
         uint256 assets,
         address receiver,
         address owner
-    ) public returns (uint256 shares) {
+    ) public virtual returns (uint256 shares) {
         if (assets == 0) revert ZeroAssets();
 
         // Calculate shares to burn
